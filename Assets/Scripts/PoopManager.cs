@@ -16,8 +16,7 @@ public class PoopManager : MonoBehaviour
 			{
 				for (int k = 0; k < 3; k++)
 				{
-					if(Random.value > 0.5)
-						Instantiate(Poop, new Vector3(j*3, i * 20 + 10, k * 3), Quaternion.identity);
+						Instantiate(Poop, new Vector3(j*2, i * 0.7f , k * 2), Quaternion.identity);
 				}
 			}
 		}
