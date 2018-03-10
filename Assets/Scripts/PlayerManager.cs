@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
 		movement = movement.normalized * speed * Time.deltaTime;
 
 		playerRigidbody.MovePosition (transform.position + movement);
+
 	}
 
 	/*
