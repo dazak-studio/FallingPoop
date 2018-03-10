@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114902877103588952}
   m_Layer: 0
   m_Name: poop
-  m_TagString: poop
+  m_TagString: PlayerManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
