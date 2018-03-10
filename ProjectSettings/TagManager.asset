@@ -7,6 +7,7 @@ TagManager:
   - PlayerManager
   - poop
   - ScoreText
+  - UIManager
   layers:
   - Default
   - TransparentFX
