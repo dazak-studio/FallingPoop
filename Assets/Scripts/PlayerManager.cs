@@ -6,15 +6,16 @@ public class PlayerManager : MonoBehaviour
 {
 
 	public float speed = 6f;
-	// public bool isEquipedShovel = false;
-
+	public bool isEquipedShovel = false;
 
 	Vector3 movement;
 	Rigidbody playerRigidbody;
+	MeshRenderer playerMeshRenderer;
 
 	void Awake ()
 	{
 		playerRigidbody = GetComponent<Rigidbody> ();
+		playerMeshRenderer = GetComponent<MeshRenderer> ();
 	}
 
 	void Update ()
@@ -23,6 +24,11 @@ public class PlayerManager : MonoBehaviour
 		float v = Input.GetAxisRaw ("Vertical");
 
 		Move (h, v);
+
+		if (Input.GetKeyDown (KeyCode.Return))
+		{
+			ToggleShovel(isEquipedShovel);
+		}
 	}
 
 	void Move (float h, float v)
@@ -32,13 +38,20 @@ public class PlayerManager : MonoBehaviour
 		movement = movement.normalized * speed * Time.deltaTime;
 
 		playerRigidbody.MovePosition (transform.position + movement);
-
 	}
 
-	/*
-	void EquipShovel (bool isEquipedS)
+	void ToggleShovel (bool isEquipedShovel)
 	{
-		Input.GetButtonDown ("Equip");
+		this.isEquipedShovel = !this.isEquipedShovel;
+
+		if (isEquipedShovel)
+		{
+			playerMeshRenderer.material.color = Color.red;
+		}
+		else
+		{
+			playerMeshRenderer.material.color = Color.white;
+		}
 	}
-	*/
+
 }
