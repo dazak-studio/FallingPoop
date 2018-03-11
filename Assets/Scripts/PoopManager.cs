@@ -9,6 +9,8 @@ public class PoopManager : MonoBehaviour
 	public int YRange = 8;
 	public KeyCode DropPoop;
 	public float PoopPercent= 0.01f;
+	public float interval = 1;
+	private float timeShooted;
 
 	// Use this for initialization
 	void Start ()
@@ -18,6 +20,11 @@ public class PoopManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		if (Time.time > timeShooted + interval)
+		{
+			PoopMaker();	
+			timeShooted = Time.time;
+		}
 		if (Input.GetKeyDown(DropPoop))
 		{
 			PoopMaker();	
