@@ -889,3 +889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca85b18137aa29544aca3ff6a2300844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 133651592}
+  poopManager: {fileID: 1070791458}
+  uiManager: {fileID: 1090705041}
