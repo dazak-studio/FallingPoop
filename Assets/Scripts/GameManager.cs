@@ -17,12 +17,27 @@ public class GameManager : MonoBehaviour {
         //playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         //uiManager = GameObject.FindGameObjectWithTag("UIManager");
 
-	}
+        SetGameStatus(GameStatus.Ready);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        // Test Code by Key Z, X, C
+        
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            SetGameStatus(GameStatus.Ready);
+        }
+        else if(Input.GetKeyDown(KeyCode.X))
+        {
+            SetGameStatus(GameStatus.Playing);
+        }
+        else if(Input.GetKeyDown(KeyCode.C))
+        {
+            SetGameStatus(GameStatus.GameOver);
+        }
+    }
 
     void SetGameStatus(GameStatus status)
     {

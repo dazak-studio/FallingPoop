@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        DoGameReady();
 	}
 	
 	// Update is called once per frame
