@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    enum GameStatus {Ready, Playing, GameOver };
+    public enum GameStatus {Ready, Playing, GameOver };
 
     public GameObject playerManager;
     public GameObject poopManager;
@@ -39,21 +39,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void SetGameStatus(GameStatus status)
+    public void SetGameStatus(GameStatus status)
     {
-        switch(status)
-        {
-            case GameStatus.Ready:
-                uiManager.GetComponent<UIManager>().DoGameReady();
-                break;
-            case GameStatus.Playing:
-                uiManager.GetComponent<UIManager>().DoGameStart();
-                break;
-            case GameStatus.GameOver:
-                uiManager.GetComponent<UIManager>().DoGameOver();
-                break;
-            default:
-                break;
-        }
+        currentGameStatus = status;
+    }
+
+    public GameStatus GetGameStatus()
+    {
+        return currentGameStatus;
     }
 }
