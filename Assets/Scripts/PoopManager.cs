@@ -18,8 +18,20 @@ public class PoopManager : MonoBehaviour
 		PoopPercent = 1 - PoopPercent;
 	}
 	
+	//#TODO Initialization is needed
+	
 	// Update is called once per frame
 	void Update () {
+
+		//Update
+		if (true)
+		{
+			PoopInterface();
+		}
+	}
+
+	void PoopInterface()
+	{
 		if (Time.time > timeShooted + interval)
 		{
 			PoopMaker();	
@@ -29,7 +41,6 @@ public class PoopManager : MonoBehaviour
 		{
 			PoopMaker();	
 		}
-		
 	}
 
 	void PoopMaker()
