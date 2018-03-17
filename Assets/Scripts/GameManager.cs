@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        SetIsPlaying(false);
+        Init();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Reset();
+            StartGame();
         }
     }
 
@@ -33,8 +33,21 @@ public class GameManager : MonoBehaviour {
         return IsPlaying;
     }
 
-    public void Reset()
+    public void Init()
     {
-        Debug.Log("Reset!!");
+        SetIsPlaying(false);
+        uiManager.GetComponent<UIManager>().Init();
+    }
+
+    public void StartGame()
+    {
+        SetIsPlaying(true);
+        uiManager.GetComponent<UIManager>().DoGameStart();
+    }
+
+    public void GameOver()
+    {
+        SetIsPlaying(false);
+        uiManager.GetComponent<UIManager>().DoGameOver();
     }
 }
