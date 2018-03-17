@@ -54,7 +54,8 @@ public class PoopIntegration : MonoBehaviour
 				Destroy(col.gameObject);
 				EatenPoop = EatenPoop + colEP;
 				float size = (float)Math.Sqrt(Math.Sqrt(EatenPoop));
-				this.transform.localScale = new Vector3(size, 0.3f*size, size);
+				this.transform.localScale = new Vector3(size, size, size);
+				this.transform.position += new Vector3(0,-0.5f,0);	
 
 			}
 			/*
