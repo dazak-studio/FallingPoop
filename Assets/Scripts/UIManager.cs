@@ -17,34 +17,20 @@ public class UIManager : MonoBehaviour {
 	void Update () {
         CheckLeftTime();
 
-        // Test Code by Key Z, X, C
-        /*
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            DoGameReady();
-        }
-        else if(Input.GetKeyDown(KeyCode.X))
-        {
-            DoGameStart();
-        }
-        else if(Input.GetKeyDown(KeyCode.C))
-        {
-            DoGameOver();
-        }
-        */
 	}
 
     // call when you want to ready game
-    public void DoGameReady()
+    public void Init()
     {
         isPlaying = false;
         leftTime = 0.0f;
-        scoreText.text = "Ready";
+        scoreText.text = "Press Enter To Start";
     }
 
     // call when you want to start game
     public void DoGameStart()
     {
+        leftTime = 0.0f;
         isPlaying = true;
     }
 
@@ -52,7 +38,7 @@ public class UIManager : MonoBehaviour {
     public void DoGameOver()
     {
         isPlaying = false;
-        scoreText.text = "Game Over";
+        scoreText.text = "Game Over, Your Score : " + (int)leftTime;
     }
 
     private void CheckLeftTime()
