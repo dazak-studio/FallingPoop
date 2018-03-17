@@ -4,56 +4,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public enum GameStatus {Ready, Playing, GameOver };
-
     public GameObject playerManager;
     public GameObject poopManager;
     public GameObject uiManager;
 
-    private GameStatus currentGameStatus;
+    private bool IsPlaying;
 
 	// Use this for initialization
 	void Start () {
-        //playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
-        //uiManager = GameObject.FindGameObjectWithTag("UIManager");
-
-        SetGameStatus(GameStatus.Ready);
+        SetIsPlaying(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        // Test Code by Key Z, X, C
-
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Reset();
         }
-
-        /*
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            SetGameStatus(GameStatus.Ready);
-        }
-        else if(Input.GetKeyDown(KeyCode.X))
-        {
-            SetGameStatus(GameStatus.Playing);
-        }
-        else if(Input.GetKeyDown(KeyCode.C))
-        {
-            SetGameStatus(GameStatus.GameOver);
-        }
-        */
     }
 
-    public void SetGameStatus(GameStatus status)
+    public void SetIsPlaying(bool IsPlaying)
     {
-        currentGameStatus = status;
+        this.IsPlaying = IsPlaying;
     }
 
-    public GameStatus GetGameStatus()
+    public bool GetIsPlaying()
     {
-        return currentGameStatus;
+        return IsPlaying;
     }
 
     public void Reset()
