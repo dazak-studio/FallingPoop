@@ -51,6 +51,7 @@ public class PoopManager : MonoBehaviour
 			{
 				if(Random.Range(0f,1f)>PoopPercent)
 					Instantiate(Poop, new Vector3(j*2-8f, 10f, k*2 -8f), Quaternion.identity);
+					
 			}
 		}
 	}
