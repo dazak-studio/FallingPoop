@@ -25,10 +25,12 @@ public class PlayerManager : MonoBehaviour
 
 		Move (h, v);
 
+        /*
 		if (Input.GetKeyDown (KeyCode.Return))
 		{
 			ToggleShovel(isEquipedShovel);
 		}
+        */
 	}
 
 	void Move (float h, float v)

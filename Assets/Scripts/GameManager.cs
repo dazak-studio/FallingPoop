@@ -24,7 +24,13 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
         // Test Code by Key Z, X, C
-        
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Reset();
+        }
+
+        /*
         if(Input.GetKeyDown(KeyCode.Z))
         {
             SetGameStatus(GameStatus.Ready);
@@ -37,6 +43,7 @@ public class GameManager : MonoBehaviour {
         {
             SetGameStatus(GameStatus.GameOver);
         }
+        */
     }
 
     public void SetGameStatus(GameStatus status)
@@ -47,5 +54,10 @@ public class GameManager : MonoBehaviour {
     public GameStatus GetGameStatus()
     {
         return currentGameStatus;
+    }
+
+    public void Reset()
+    {
+        Debug.Log("Reset!!");
     }
 }
