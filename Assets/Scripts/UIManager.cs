@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         leftTime = 0.0f;
-        scoreText.text = "Press Enter To Start";
+        scoreText.text = "Press Z To Start";
     }
 
     // call when you want to start game
