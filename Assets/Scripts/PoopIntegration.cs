@@ -21,6 +21,16 @@ public class PoopIntegration : MonoBehaviour
 	}
 	// Update is called once per frame
 	void Update () {
+		FallingPoopDestroy();
+	}
+
+	void FallingPoopDestroy()
+	{
+		Debug.Log(this.transform.position.y);
+		if (this.transform.position.y < -4f)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
 	private void setEP(int ep)
