@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Text scoreText;
+    public Text mainText;
     private float leftTime;
     private bool isPlaying;
 
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour {
         isPlaying = false;
         leftTime = 0.0f;
         scoreText.text = "Press Z To Start";
+        mainText.text = "DDONG PI HA GI";
     }
 
     // call when you want to start game
@@ -32,13 +34,15 @@ public class UIManager : MonoBehaviour {
     {
         leftTime = 0.0f;
         isPlaying = true;
+        mainText.text = "";
     }
 
     // call when you want to do gameover
     public void DoGameOver()
     {
         isPlaying = false;
-        scoreText.text = "Game Over, Your Score : " + (int)leftTime;
+        mainText.text = "GAME OVER";
+        scoreText.text = "Your Score : " + (int)leftTime + ", Press R to restart";
     }
 
     private void CheckLeftTime()
