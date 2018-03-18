@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
     }
   }
 
-  void InitPosition ()
+  public void InitPosition ()
   {
     this.transform.position = initialPosition;
     this.transform.rotation = initialRotation;
