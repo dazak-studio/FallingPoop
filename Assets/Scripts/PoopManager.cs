@@ -12,6 +12,8 @@ public class PoopManager : MonoBehaviour
 	public float interval = 1;
 	private float timeShooted;
 
+	public GameObject gameManager;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -24,7 +26,7 @@ public class PoopManager : MonoBehaviour
 	void Update () {
 
 		//Update
-		if (true)
+		if (gameManager.GetComponent<GameManager>().GetIsPlaying())
 		{
 			PoopInterface();
 		}

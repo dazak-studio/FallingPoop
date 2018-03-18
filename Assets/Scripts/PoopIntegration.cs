@@ -13,10 +13,11 @@ public class PoopIntegration : MonoBehaviour
 
 	private bool done = false;
 	private int EatenPoop = 1;
-	public GameObject Poop;
+	private GameObject gamemanager;
 
 	void Start ()
 	{
+		gamemanager = GameObject.FindWithTag("GameManager");
 
 	}
 	// Update is called once per frame
@@ -26,7 +27,10 @@ public class PoopIntegration : MonoBehaviour
 
 	void FallingPoopDestroy()
 	{
-		Debug.Log(this.transform.position.y);
+		if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
+		{
+			Destroy(this.gameObject);
+		}
 		if (this.transform.position.y < -4f)
 		{
 			Destroy(this.gameObject);
