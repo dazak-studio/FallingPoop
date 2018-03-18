@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + ", Press R to restart";
+        scoreText.text = "Your Score : " + (int)leftTime + ", Press Z to restart";
     }
 
     private void CheckLeftTime()
