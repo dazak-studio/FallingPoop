@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
   public float moveSpeed = 12f;
   public bool isEquipedShovel = false;
+  private Vector3 initialPosition;
+  private Quaternion initialRotation;
 
   Vector3 lookDirection;
 
@@ -18,6 +20,12 @@ public class PlayerManager : MonoBehaviour
     playerRigidbody = GetComponent<Rigidbody> ();
     playerMeshRenderer = GetComponent<MeshRenderer> ();
   }
+
+  void Start ()
+  {
+    initialPosition = this.transform.position;
+    initialRotation = this.transform.rotation;
+  }
 
   void Update ()
   {
@@ -36,6 +44,17 @@ public class PlayerManager : MonoBehaviour
     {
       ToggleShovel(isEquipedShovel);
     }
+
+    if (Input.GetKeyDown (KeyCode.I))
+    {
+      InitPosition();
+    }
+  }
+
+  void InitPosition ()
+  {
+    this.transform.position = initialPosition;
+    this.transform.rotation = initialRotation;
   }
 
   void Move (float h, float v)
