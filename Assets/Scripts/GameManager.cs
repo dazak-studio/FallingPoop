@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour {
         {
             StartGame();
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameOver();
+        }
     }
 
     public void SetIsPlaying(bool IsPlaying)

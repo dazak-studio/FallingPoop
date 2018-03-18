@@ -4,56 +4,85 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+  public float moveSpeed = 12f;
+  public bool isEquipedShovel = false;
+  private Vector3 initialPosition;
+  private Quaternion initialRotation;
 
-	public float speed = 6f;
-	public bool isEquipedShovel = false;
+  Vector3 lookDirection;
 
-	Vector3 movement;
-	Rigidbody playerRigidbody;
-	MeshRenderer playerMeshRenderer;
+  Vector3 movement;
+  Rigidbody playerRigidbody;
+  MeshRenderer playerMeshRenderer;
 
-	void Awake ()
-	{
-		playerRigidbody = GetComponent<Rigidbody> ();
-		playerMeshRenderer = GetComponent<MeshRenderer> ();
-	}
+  void Awake ()
+  {
+    playerRigidbody = GetComponent<Rigidbody> ();
+    playerMeshRenderer = GetComponent<MeshRenderer> ();
+  }
 
-	void Update ()
-	{
-		float h = Input.GetAxisRaw ("Horizontal");
-		float v = Input.GetAxisRaw ("Vertical");
+  void Start ()
+  {
+    initialPosition = this.transform.position;
+    initialRotation = this.transform.rotation;
+  }
 
-		Move (h, v);
+  void Update ()
+  {
+    if (Input.GetKey (KeyCode.W) ||
+        Input.GetKey (KeyCode.A) ||
+        Input.GetKey (KeyCode.S) ||
+        Input.GetKey (KeyCode.D))
+    {
+      float h = Input.GetAxisRaw ("Horizontal");
+      float v = Input.GetAxisRaw ("Vertical");
+      
+      Move (h, v);
+    }
 
-        /*
-		if (Input.GetKeyDown (KeyCode.Return))
-		{
-			ToggleShovel(isEquipedShovel);
-		}
-        */
-	}
+    if (Input.GetKeyDown (KeyCode.Return))
+    {
+      ToggleShovel(isEquipedShovel);
+    }
 
-	void Move (float h, float v)
-	{
-		movement.Set (h, 0f, v);
+    if (Input.GetKeyDown (KeyCode.I))
+    {
+      InitPosition();
+    }
+  }
 
-		movement = movement.normalized * speed * Time.deltaTime;
+  void InitPosition ()
+  {
+    this.transform.position = initialPosition;
+    this.transform.rotation = initialRotation;
+  }
 
-		playerRigidbody.MovePosition (transform.position + movement);
-	}
+  void Move (float h, float v)
+  {
+    float moveSpeed = this.moveSpeed;
 
-	void ToggleShovel (bool isEquipedShovel)
-	{
-		this.isEquipedShovel = !this.isEquipedShovel;
+    if (isEquipedShovel) {
+      moveSpeed = 5f;
+    }
 
-		if (isEquipedShovel)
-		{
-			playerMeshRenderer.material.color = Color.red;
-		}
-		else
-		{
-			playerMeshRenderer.material.color = Color.white;
-		}
-	}
+    // Set player look direction
+    lookDirection = h * Vector3.right + v * Vector3.forward;
+    this.transform.rotation = Quaternion.LookRotation (lookDirection);
 
+    this.transform.Translate (Vector3.forward * moveSpeed * Time.deltaTime);
+  }
+
+  void ToggleShovel (bool isEquipedShovel)
+  {
+    this.isEquipedShovel = !this.isEquipedShovel;
+
+    if (isEquipedShovel)
+    {
+      playerMeshRenderer.material.color = Color.white;
+    }
+    else
+    {
+      playerMeshRenderer.material.color = Color.red;
+    }
+  }
 }

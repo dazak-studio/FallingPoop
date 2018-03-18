@@ -12,14 +12,28 @@ public class PoopManager : MonoBehaviour
 	public float interval = 1;
 	private float timeShooted;
 
+	public GameObject gameManager;
+
 	// Use this for initialization
 	void Start ()
 	{
 		PoopPercent = 1 - PoopPercent;
 	}
 	
+	//#TODO Initialization is needed
+	
 	// Update is called once per frame
 	void Update () {
+
+		//Update
+		if (gameManager.GetComponent<GameManager>().GetIsPlaying())
+		{
+			PoopInterface();
+		}
+	}
+
+	void PoopInterface()
+	{
 		if (Time.time > timeShooted + interval)
 		{
 			PoopMaker();	
@@ -29,7 +43,6 @@ public class PoopManager : MonoBehaviour
 		{
 			PoopMaker();	
 		}
-		
 	}
 
 	void PoopMaker()
@@ -40,6 +53,7 @@ public class PoopManager : MonoBehaviour
 			{
 				if(Random.Range(0f,1f)>PoopPercent)
 					Instantiate(Poop, new Vector3(j*2-8f, 10f, k*2 -8f), Quaternion.identity);
+					
 			}
 		}
 	}
