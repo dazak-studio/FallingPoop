@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress Z to Restart";
+        scoreText.text = "Your Score : " + (int)leftTime + "\n\nFallen Poops : " + poopScore + " kg" + "\n\nPress Z to Restart";
     }
 
     private void CheckLeftTime()
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour {
         if (isPlaying)
         {
             leftTime += Time.deltaTime;
-            scoreText.text = "Time : " + (int)leftTime + " sec";
+            scoreText.text = "Time : " + (int)leftTime + " sec" + "\n\nFallen Poops : " + poopScore + " kg";
         }
     }
 }
