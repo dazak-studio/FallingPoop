@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     public GameObject poopManager;
     public GameObject uiManager;
 
+    public AudioSource bgSound;
+
     private bool IsPlaying;
 
 	// Use this for initialization
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
     public void Init()
     {
+	    bgSound.Play();
         SetIsPlaying(false);
         uiManager.GetComponent<UIManager>().Init();
     }
@@ -46,12 +49,14 @@ public class GameManager : MonoBehaviour {
         uiManager.GetComponent<UIManager>().DoGameStart();
 
         LumberjackAnimationScript.instance.SetAnimState(0);
+        bgSound.Play();
     }
 
     public void GameOver()
     {
         SetIsPlaying(false);
         uiManager.GetComponent<UIManager>().DoGameOver();
+        bgSound.Stop();
 
         LumberjackAnimationScript.instance.SetAnimState(3);
     }
