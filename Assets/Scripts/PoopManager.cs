@@ -5,8 +5,8 @@ using System.Collections;
 public class PoopManager : MonoBehaviour
 {
 	public GameObject Poop;
-	public int XRange = 10;
-	public int YRange = 10;
+	private int XRange = 10;
+	private int YRange = 10;
 	public KeyCode DropPoop;
 	public float PoopPercent= 1;
 	public float interval = 1;
