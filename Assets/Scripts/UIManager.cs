@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour {
         isPlaying = false;
         leftTime = 0.0f;
         scoreText.text = "Press Z To Start";
-        mainText.text = "DDONG PI HA GI";
+        mainText.text = "Falling Poops 3D";
     }
 
     // call when you want to start game
@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + ", Press Z to restart";
+        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress Z to Restart";
     }
 
     private void CheckLeftTime()
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour {
         if (isPlaying)
         {
             leftTime += Time.deltaTime;
-            scoreText.text = "You Survived for " + (int)leftTime + " seconds!";
+            scoreText.text = "Time : " + (int)leftTime + " sec";
         }
     }
 }
