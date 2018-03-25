@@ -37,7 +37,7 @@ public class PoopManager : MonoBehaviour
 			onGoingTime = Time.time - startTime;
 			if (onGoingTime < 10)
 			{
-				PoopPercent = onGoingTime / 100;
+				PoopPercent = onGoingTime / 1000;
 			}
 		}
 		else
