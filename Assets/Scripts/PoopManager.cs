@@ -35,7 +35,7 @@ public class PoopManager : MonoBehaviour
 		{
 			PoopInterface();
 			onGoingTime = Time.time - startTime;
-			if (onGoingTime < 70)
+			if (onGoingTime < 10)
 			{
 				PoopPercent = onGoingTime / 100;
 			}
@@ -68,7 +68,7 @@ public class PoopManager : MonoBehaviour
 			for (int k = 0; k < YRange; k++)
 			{
 				if(Random.Range(0f,1f)<PoopPercent)
-					Instantiate(Poop, new Vector3(j*2-8f, 10f+Random.RandomRange(0f,15f), k*2 -8f), Quaternion.identity);
+					Instantiate(Poop, new Vector3(j*2-8f+Random.RandomRange(0.0f,1f), 10f+Random.RandomRange(0f,15f), k*2 -8f+Random.RandomRange(0f,1f)), Quaternion.identity);
 					
 			}
 		}
