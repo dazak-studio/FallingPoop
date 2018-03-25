@@ -29,6 +29,11 @@ public class LumberjackAnimationScript : MonoBehaviour {
             anim.SetInteger("StateValue", 2);
             anim.SetBool("NeedsChanging", true);
         }
+        else if (Input.GetKeyDown(KeyCode.M))
+        {
+            anim.SetInteger("StateValue", 3);
+            anim.SetBool("NeedsChanging", true);
+        }
         else
         {
             anim.SetBool("NeedsChanging", false);
