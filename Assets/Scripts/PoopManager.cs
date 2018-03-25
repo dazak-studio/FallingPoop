@@ -8,16 +8,21 @@ public class PoopManager : MonoBehaviour
 	public int XRange = 8;
 	public int YRange = 8;
 	public KeyCode DropPoop;
-	public float PoopPercent= 0.01f;
+	public float PoopPercent= 1;
 	public float interval = 1;
 	private float timeShooted;
+	
+	//#TODO Maybe the time should be synced
+	private float startTime = 0f;
+	private float onGoingTime = 0f;
+	
 
 	public GameObject gameManager;
 
 	// Use this for initialization
 	void Start ()
 	{
-		PoopPercent = 1 - PoopPercent;
+		PoopPercent = 1 ;
 	}
 	
 	//#TODO Initialization is needed
@@ -29,7 +34,18 @@ public class PoopManager : MonoBehaviour
 		if (gameManager.GetComponent<GameManager>().GetIsPlaying())
 		{
 			PoopInterface();
+			onGoingTime = Time.time - startTime;
+			if (onGoingTime < 70)
+			{
+				PoopPercent = onGoingTime / 100;
+			}
+			Debug.Log(PoopPercent);
 		}
+		else
+		{
+			startTime = Time.time;
+		}
+		
 	}
 
 	void PoopInterface()
@@ -51,8 +67,8 @@ public class PoopManager : MonoBehaviour
 		{
 			for (int k = 0; k < YRange; k++)
 			{
-				if(Random.Range(0f,1f)>PoopPercent)
-					Instantiate(Poop, new Vector3(j*2-8f, 10f, k*2 -8f), Quaternion.identity);
+				if(Random.Range(0f,1f)<PoopPercent)
+					Instantiate(Poop, new Vector3(j*2-8f, 10f+Random.RandomRange(0f,15f), k*2 -8f), Quaternion.identity);
 					
 			}
 		}
