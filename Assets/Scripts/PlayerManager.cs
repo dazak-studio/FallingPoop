@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+	public GameObject gameManager;
+	
   public float moveSpeed = 12f;
+	// 일반 : 12f, 삽 들었을 때 : 10f, 삽 들고 똥 밀 때 : 5f
   public bool isEquipedShovel = false;
   private Vector3 initialPosition;
   private Quaternion initialRotation;
@@ -23,6 +26,7 @@ public class PlayerManager : MonoBehaviour
 
   void Start ()
   {
+		gameManager = GameObject.FindWithTag("GameManager");
     initialPosition = this.transform.position;
     initialRotation = this.transform.rotation;
   }
@@ -42,19 +46,43 @@ public class PlayerManager : MonoBehaviour
 
     if (Input.GetKeyDown (KeyCode.Return))
     {
-      ToggleShovel(isEquipedShovel);
+      ToggleShovel (isEquipedShovel);
     }
 
     if (Input.GetKeyDown (KeyCode.I))
     {
-      InitPosition();
+      InitPosition ();
     }
   }
+
+	void FixedUpdate ()
+	{
+		FallOut ();
+	}
+
+	void OnCollisionEnter (Collision other) {
+		if (other.transform.tag == "poop")
+		{
+			if (isEquipedShovel)
+			{
+				PushPoop ();
+			}
+			else
+			{
+				TouchPoop ();
+			}
+		}
+	}
 
   public void InitPosition ()
   {
     this.transform.position = initialPosition;
     this.transform.rotation = initialRotation;
+
+		if (isEquipedShovel)
+		{
+			ToggleShovel (isEquipedShovel);
+		}
   }
 
   void Move (float h, float v)
@@ -72,6 +100,14 @@ public class PlayerManager : MonoBehaviour
     this.transform.Translate (Vector3.forward * moveSpeed * Time.deltaTime);
   }
 
+	void FallOut ()
+	{
+		if (this.transform.position.y < -16)
+		{
+			gameManager.GetComponent<GameManager>().GameOver();
+		}
+	}
+
   void ToggleShovel (bool isEquipedShovel)
   {
     this.isEquipedShovel = !this.isEquipedShovel;
@@ -82,7 +118,17 @@ public class PlayerManager : MonoBehaviour
     }
     else
     {
-      playerMeshRenderer.material.color = Color.red;
+			playerMeshRenderer.material.color = Color.red;
     }
   }
+
+	void PushPoop ()
+	{
+		// 삽 들고 똥 밀 때에 대한 함수. 만들어 놓기만 함.
+	}
+
+	void TouchPoop ()
+	{
+		gameManager.GetComponent<GameManager>().GameOver();
+	}
 }
