@@ -22,7 +22,7 @@ public class PoopManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		PoopPercent = 1 ;
+		PoopPercent = 0 ;
 	}
 	
 	//#TODO Initialization is needed
