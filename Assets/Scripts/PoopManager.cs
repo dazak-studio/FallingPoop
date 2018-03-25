@@ -5,8 +5,8 @@ using System.Collections;
 public class PoopManager : MonoBehaviour
 {
 	public GameObject Poop;
-	public int XRange = 8;
-	public int YRange = 8;
+	public int XRange = 10;
+	public int YRange = 10;
 	public KeyCode DropPoop;
 	public float PoopPercent= 1;
 	public float interval = 1;
@@ -67,7 +67,7 @@ public class PoopManager : MonoBehaviour
 			for (int k = 0; k < YRange; k++)
 			{
 				if(Random.Range(0f,1f)<PoopPercent)
-					Instantiate(Poop, new Vector3(j*2-8f+Random.RandomRange(0.0f,1f), 10f+Random.RandomRange(0f,15f), k*2 -8f+Random.RandomRange(0f,1f)), Quaternion.identity);
+					Instantiate(Poop, new Vector3(j*2-(float)XRange+Random.RandomRange(0.0f,1f), 10f+Random.RandomRange(0f,15f), k*2 -(float)YRange+Random.RandomRange(0f,1f)), Quaternion.identity);
 					
 			}
 		}
