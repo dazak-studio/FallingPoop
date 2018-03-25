@@ -13,10 +13,12 @@ public class PoopIntegration : MonoBehaviour
 	private bool done = false;
 	private int EatenPoop = 1;
 	private GameObject gamemanager;
+	private GameObject uimanager;
 
 	void Start ()
 	{
 		gamemanager = GameObject.FindWithTag("GameManager");
+		uimanager = GameObject.FindWithTag("UIManager");
 
 	}
 	// Update is called once per frame
@@ -32,6 +34,7 @@ public class PoopIntegration : MonoBehaviour
 		}
 		if (this.transform.position.y < -4f)
 		{
+			uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
 			Destroy(this.gameObject);
 		}
 	}

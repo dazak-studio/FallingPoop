@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour {
     public Text mainText;
     private float leftTime;
     private bool isPlaying;
-
+    public float poopScore;
+    
 	// Use this for initialization
 	void Start () {
 	}
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckLeftTime();
+	    Debug.Log(poopScore);
 
 	}
 
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         isPlaying = true;
         mainText.text = "";
+        poopScore = 0;
     }
 
     // call when you want to do gameover
