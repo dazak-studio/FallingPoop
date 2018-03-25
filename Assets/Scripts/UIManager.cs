@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckLeftTime();
-	    Debug.Log(poopScore);
-
 	}
 
     // call when you want to ready game

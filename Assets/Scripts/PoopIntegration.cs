@@ -14,11 +14,13 @@ public class PoopIntegration : MonoBehaviour
 	private int EatenPoop = 1;
 	private GameObject gamemanager;
 	private GameObject uimanager;
+	private GameObject landmanager;
 
 	void Start ()
 	{
 		gamemanager = GameObject.FindWithTag("GameManager");
 		uimanager = GameObject.FindWithTag("UIManager");
+		landmanager = GameObject.FindWithTag("Land");
 
 	}
 	// Update is called once per frame
@@ -76,8 +78,8 @@ public class PoopIntegration : MonoBehaviour
 				EatenPoop = EatenPoop + colEP;
 				float size = (float)Math.Sqrt(Math.Sqrt(EatenPoop));
 				this.transform.localScale = new Vector3(size, size, size);
-				this.transform.position += new Vector3(0,-0.5f,0);	
-
+				this.transform.position += new Vector3(0,-0.5f,0);
+				landmanager.GetComponent<LandManager>().val++;
 			}
 			/*
 			Transform thisObject = this.gameObject.transform;

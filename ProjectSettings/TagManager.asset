@@ -9,6 +9,7 @@ TagManager:
   - ScoreText
   - UIManager
   - GameManager
+  - Land
   layers:
   - Default
   - TransparentFX
