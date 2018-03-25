@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour {
     {
         SetIsPlaying(true);
         uiManager.GetComponent<UIManager>().DoGameStart();
+
+        LumberjackAnimationScript.instance.SetAnimState(0);
     }
 
     public void GameOver()
@@ -50,5 +52,7 @@ public class GameManager : MonoBehaviour {
         SetIsPlaying(false);
         playerManager.GetComponent<PlayerManager>().InitPosition();
         uiManager.GetComponent<UIManager>().DoGameOver();
+
+        LumberjackAnimationScript.instance.SetAnimState(3);
     }
 }

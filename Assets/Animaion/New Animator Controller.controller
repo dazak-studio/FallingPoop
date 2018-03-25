@@ -13,13 +13,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: NeedsChanging
-    m_Type: 4
+    m_Controller: {fileID: 0}
+  - m_Name: TriggerChangeAnim
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -44,7 +44,7 @@ AnimatorStateTransition:
     m_ConditionEvent: StateValue
     m_EventTreshold: 3
   - m_ConditionMode: 1
-    m_ConditionEvent: NeedsChanging
+    m_ConditionEvent: TriggerChangeAnim
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102572232459626516}
@@ -71,7 +71,7 @@ AnimatorStateTransition:
     m_ConditionEvent: StateValue
     m_EventTreshold: 2
   - m_ConditionMode: 1
-    m_ConditionEvent: NeedsChanging
+    m_ConditionEvent: TriggerChangeAnim
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102462551061273530}
@@ -98,7 +98,7 @@ AnimatorStateTransition:
     m_ConditionEvent: StateValue
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: NeedsChanging
+    m_ConditionEvent: TriggerChangeAnim
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102957404327894850}
@@ -125,7 +125,7 @@ AnimatorStateTransition:
     m_ConditionEvent: StateValue
     m_EventTreshold: 1
   - m_ConditionMode: 1
-    m_ConditionEvent: NeedsChanging
+    m_ConditionEvent: TriggerChangeAnim
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102324164830251632}

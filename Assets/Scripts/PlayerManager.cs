@@ -4,131 +4,164 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-	public GameObject gameManager;
-	
-  public float moveSpeed = 12f;
-	// 일반 : 12f, 삽 들었을 때 : 10f, 삽 들고 똥 밀 때 : 5f
-  public bool isEquipedShovel = false;
-  private Vector3 initialPosition;
-  private Quaternion initialRotation;
+    public GameObject gameManager;
 
-  Vector3 lookDirection;
+    public float moveSpeed = 12f;
+    // 일반 : 12f, 삽 들었을 때 : 10f, 삽 들고 똥 밀 때 : 5f
+    public bool isEquipedShovel = false;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
-  Vector3 movement;
-  Rigidbody playerRigidbody;
-  MeshRenderer playerMeshRenderer;
+    Vector3 lookDirection;
 
-  void Awake ()
-  {
-    playerRigidbody = GetComponent<Rigidbody> ();
-    playerMeshRenderer = GetComponent<MeshRenderer> ();
-  }
+    Vector3 movement;
+    Rigidbody playerRigidbody;
+    //MeshRenderer playerMeshRenderer;
 
-  void Start ()
-  {
-		gameManager = GameObject.FindWithTag("GameManager");
-    initialPosition = this.transform.position;
-    initialRotation = this.transform.rotation;
-  }
+    void Awake()
+    {
+        playerRigidbody = GetComponent<Rigidbody>();
+        //playerMeshRenderer = GetComponent<MeshRenderer> ();
+    }
 
-  void Update ()
-  {
-    if (Input.GetKey (KeyCode.W) ||
-        Input.GetKey (KeyCode.A) ||
-        Input.GetKey (KeyCode.S) ||
-        Input.GetKey (KeyCode.D))
-    {
-      float h = Input.GetAxisRaw ("Horizontal");
-      float v = Input.GetAxisRaw ("Vertical");
-      
-      Move (h, v);
-    }
+    void Start()
+    {
+        gameManager = GameObject.FindWithTag("GameManager");
+        initialPosition = this.transform.position;
+        initialRotation = this.transform.rotation;
+    }
 
-    if (Input.GetKeyDown (KeyCode.Return))
-    {
-      ToggleShovel (isEquipedShovel);
-    }
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.W) ||
+        Input.GetKey(KeyCode.A) ||
+        Input.GetKey(KeyCode.S) ||
+        Input.GetKey(KeyCode.D))
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
 
-    if (Input.GetKeyDown (KeyCode.I))
-    {
-      InitPosition ();
-    }
-  }
+            Move(h, v);
+            if (!gameManager.GetComponent<GameManager>().GetIsPlaying())
+            {
+                LumberjackAnimationScript.instance.SetAnimState(3);
+            }
+            else if (isEquipedShovel)
+            {
+                LumberjackAnimationScript.instance.SetAnimState(2);
+            }
+            else
+            {
+                LumberjackAnimationScript.instance.SetAnimState(1);
+            }
+        }
+        else
+        {
 
-	void FixedUpdate ()
-	{
-		FallOut ();
-	}
+            if (!gameManager.GetComponent<GameManager>().GetIsPlaying())
+            {
+                LumberjackAnimationScript.instance.SetAnimState(3);
+            }
+            else if (isEquipedShovel)
+            {
+                LumberjackAnimationScript.instance.SetAnimState(2);
+            }
+            else
+            {
+                LumberjackAnimationScript.instance.SetAnimState(0);
+            }
+        }
 
-	void OnCollisionEnter (Collision other) {
-		if (other.transform.tag == "poop")
-		{
-			if (isEquipedShovel)
-			{
-				PushPoop ();
-			}
-			else
-			{
-				TouchPoop ();
-			}
-		}
-	}
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ToggleShovel(isEquipedShovel);
+        }
 
-  public void InitPosition ()
-  {
-    this.transform.position = initialPosition;
-    this.transform.rotation = initialRotation;
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            InitPosition();
+        }
 
-		if (isEquipedShovel)
-		{
-			ToggleShovel (isEquipedShovel);
-		}
-  }
 
-  void Move (float h, float v)
-  {
-    float moveSpeed = this.moveSpeed;
+    }
 
-    if (isEquipedShovel) {
-      moveSpeed = 5f;
-    }
+    void FixedUpdate()
+    {
+        FallOut();
+    }
 
-    // Set player look direction
-    lookDirection = h * Vector3.right + v * Vector3.forward;
-    this.transform.rotation = Quaternion.LookRotation (lookDirection);
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.tag == "poop")
+        {
+            if (isEquipedShovel)
+            {
+                PushPoop();
+            }
+            else
+            {
+                TouchPoop();
+            }
+        }
+    }
 
-    this.transform.Translate (Vector3.forward * moveSpeed * Time.deltaTime);
-  }
+    public void InitPosition()
+    {
+        this.transform.position = initialPosition;
+        this.transform.rotation = initialRotation;
 
-	void FallOut ()
-	{
-		if (this.transform.position.y < -16)
-		{
-			gameManager.GetComponent<GameManager>().GameOver();
-		}
-	}
+        if (isEquipedShovel)
+        {
+            ToggleShovel(isEquipedShovel);
+        }
+    }
 
-  void ToggleShovel (bool isEquipedShovel)
-  {
-    this.isEquipedShovel = !this.isEquipedShovel;
+    void Move(float h, float v)
+    {
+        float moveSpeed = this.moveSpeed;
 
-    if (isEquipedShovel)
-    {
-      playerMeshRenderer.material.color = Color.white;
-    }
-    else
-    {
-			playerMeshRenderer.material.color = Color.red;
-    }
-  }
+        if (isEquipedShovel)
+        {
+            moveSpeed = 5f;
+        }
 
-	void PushPoop ()
-	{
-		// 삽 들고 똥 밀 때에 대한 함수. 만들어 놓기만 함.
-	}
+        // Set player look direction
+        lookDirection = h * Vector3.right + v * Vector3.forward;
+        this.transform.rotation = Quaternion.LookRotation(lookDirection);
 
-	void TouchPoop ()
-	{
-		gameManager.GetComponent<GameManager>().GameOver();
-	}
+        this.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+
+    }
+
+    void FallOut()
+    {
+        if (this.transform.position.y < -16)
+        {
+            gameManager.GetComponent<GameManager>().GameOver();
+        }
+    }
+
+    void ToggleShovel(bool isEquipedShovel)
+    {
+        this.isEquipedShovel = !this.isEquipedShovel;
+
+        // if (isEquipedShovel)
+        // {
+        //   playerMeshRenderer.material.color = Color.white;
+        //     }
+        // else
+        // {
+        //playerMeshRenderer.material.color = Color.red;
+        //     }
+    }
+
+    void PushPoop()
+    {
+        // 삽 들고 똥 밀 때에 대한 함수. 만들어 놓기만 함.
+    }
+
+    void TouchPoop()
+    {
+        gameManager.GetComponent<GameManager>().GameOver();
+    }
 }
