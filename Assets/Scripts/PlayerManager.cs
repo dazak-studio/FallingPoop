@@ -6,8 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     public GameObject gameManager;
 
-    public float moveSpeed = 12f;
-    // 일반 : 12f, 삽 들었을 때 : 10f, 삽 들고 똥 밀 때 : 5f
+    public float moveSpeed = 10f;
+    // 일반 : 10f, 삽 들었을 때 : 8f, 삽 들고 똥 밀 때 : 5f
     public bool isEquipedShovel = false;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
@@ -33,10 +33,14 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) ||
-        Input.GetKey(KeyCode.A) ||
-        Input.GetKey(KeyCode.S) ||
-        Input.GetKey(KeyCode.D))
+        if (
+            (Input.GetKey(KeyCode.UpArrow) ||
+             Input.GetKey(KeyCode.LeftArrow) ||
+             Input.GetKey(KeyCode.DownArrow) ||
+             Input.GetKey(KeyCode.RightArrow))
+            &&
+            gameManager.GetComponent<GameManager>().GetIsPlaying()
+        )
         {
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
@@ -72,16 +76,18 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ToggleShovel(isEquipedShovel);
         }
 
+    /*
+        Position Init Test Code
         if (Input.GetKeyDown(KeyCode.I))
         {
             InitPosition();
         }
-
+    */
 
     }
 
