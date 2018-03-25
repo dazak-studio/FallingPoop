@@ -56,6 +56,11 @@ public class PoopIntegration : MonoBehaviour
 	}
 	void OnCollisionEnter (Collision col)
 	{
+		if (col.gameObject.tag == "Player")
+		{
+			if(this.transform.position.y>0)
+				gamemanager.GetComponent<GameManager>().GameOver();
+		}
 		if (col.gameObject.tag == "poop")
 		{
 			Transform thisObject = this.gameObject.transform;

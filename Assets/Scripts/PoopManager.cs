@@ -39,7 +39,6 @@ public class PoopManager : MonoBehaviour
 			{
 				PoopPercent = onGoingTime / 100;
 			}
-			Debug.Log(PoopPercent);
 		}
 		else
 		{
