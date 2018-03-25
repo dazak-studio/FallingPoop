@@ -82,7 +82,7 @@ public class PlayerManager : MonoBehaviour
         }
 
     /*
-        Position Init Test Code
+        // Position Init Test Code
         if (Input.GetKeyDown(KeyCode.I))
         {
             InitPosition();
