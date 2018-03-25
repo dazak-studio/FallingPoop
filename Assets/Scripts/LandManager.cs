@@ -17,7 +17,7 @@ public class LandManager : MonoBehaviour
 	void Update () {
 		if (prevval != val)
 		{
-			
+			fallenPoop.Play();		
 			prevval = val;
 		}
 		

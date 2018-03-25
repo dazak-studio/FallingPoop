@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public bool isEquipedShovel = false;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+    public AudioSource dyingAudio;
 
     Vector3 lookDirection;
 
@@ -141,9 +142,12 @@ public class PlayerManager : MonoBehaviour
 
     void FallOut()
     {
-        if (this.transform.position.y < -16)
+        if ((int)this.transform.position.y == -3)
         {
+            dyingAudio.Play();
+            Debug.Log("test");
             gameManager.GetComponent<GameManager>().GameOver();
+            
         }
     }
 
@@ -168,6 +172,7 @@ public class PlayerManager : MonoBehaviour
 
     void TouchPoop()
     {
+        dyingAudio.Play();
         gameManager.GetComponent<GameManager>().GameOver();
     }
 }
