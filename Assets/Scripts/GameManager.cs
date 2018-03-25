@@ -17,13 +17,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!GetIsPlaying() && Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             StartGame();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GameOver();
         }
     }
 
@@ -47,12 +43,12 @@ public class GameManager : MonoBehaviour {
     {
         SetIsPlaying(true);
         uiManager.GetComponent<UIManager>().DoGameStart();
-        playerManager.GetComponent<PlayerManager>().InitPosition();
     }
 
     public void GameOver()
     {
         SetIsPlaying(false);
+        playerManager.GetComponent<PlayerManager>().InitPosition();
         uiManager.GetComponent<UIManager>().DoGameOver();
     }
 }
