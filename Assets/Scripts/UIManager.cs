@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Text scoreText;
+    public Text helpText;
     public Text mainText;
     private float leftTime;
     private bool isPlaying;
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         scoreText.text = "Press Z To Start";
         mainText.text = "Falling Poops 3D";
+        helpText.text = "Move : ← ↑ ↓ →\n\nChange Mode : Space";
     }
 
     // call when you want to start game
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         isPlaying = true;
         mainText.text = "";
+        helpText.text = "";
         poopScore = 0;
     }
 
