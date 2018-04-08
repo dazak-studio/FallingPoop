@@ -47,7 +47,9 @@ public class PoopIntegration : MonoBehaviour
 			{
 				isLanded = true;
 				landedTime = Time.time;
-			}else if (Time.time > 0.3f+landedTime)
+			}else if (Time.time > 0.3f+landedTime
+                && gamemanager != null 
+                && gamemanager.GetComponent<GameManager>().GetIsPlaying())
 			{
 				Destroy(poopShadow);
 				Destroy(this.gameObject);
@@ -58,11 +60,11 @@ public class PoopIntegration : MonoBehaviour
 	}
 	void FallingPoopDestroy()
 	{
-		if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
-		{
-			Destroy(poopShadow);
-			Destroy(this.gameObject);
-		}
+		//if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
+		//{
+		//	Destroy(poopShadow);
+		//	Destroy(this.gameObject);
+		//}
 		if (this.transform.position.y < -4f)
 		{
 			uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
@@ -87,6 +89,7 @@ public class PoopIntegration : MonoBehaviour
             && gamemanager.GetComponent<GameManager>().GetIsPlaying())
         {
             Destroy(this.gameObject);
+            Destroy(poopShadow);
         }
     }
 
