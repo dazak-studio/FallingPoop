@@ -26,30 +26,30 @@ public class LumberjackAnimationScript : MonoBehaviour {
     }
 
     Animator anim;
-    private int animState;
+    //private int animState;
     private int beforeAnimState;
 
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
-        animState = -1;
+        //animState = -1;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (animState != -1)
-        {
-            anim.SetBool("NeedsChanging", false);
-            animState = -1;
-        }
+        //if (animState != -1)
+        //{
+        //    anim.SetBool("NeedsChanging", false);
+        //    animState = -1;
+        //}
     }
 
     public void SetAnimState(int newAnimState)
     {
         if(beforeAnimState != newAnimState)
         {
-            animState = newAnimState;
+            //animState = newAnimState;
             anim.SetInteger("StateValue", newAnimState);
             anim.SetTrigger("TriggerChangeAnim");
             beforeAnimState = newAnimState;
