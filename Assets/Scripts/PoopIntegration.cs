@@ -14,6 +14,8 @@ public class PoopIntegration : MonoBehaviour
 	private GameObject gamemanager;
 	private GameObject uimanager;
 	private GameObject landmanager;
+	private bool isLanded = false;
+	private float landedTime;
 
 	void Start ()
 	{
@@ -25,8 +27,25 @@ public class PoopIntegration : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		FallingPoopDestroy();
+		LandedPoopDestory();
 	}
 
+	void LandedPoopDestory()
+	{
+		if (this.transform.position.y < 0.1f)
+		{
+			if (isLanded == false)
+			{
+				isLanded = true;
+				landedTime = Time.time;
+			}else if (Time.time > 0.5f+landedTime)
+			{
+				Destroy(this.gameObject);
+			}
+		}
+		
+		
+	}
 	void FallingPoopDestroy()
 	{
 		if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
@@ -64,8 +83,7 @@ public class PoopIntegration : MonoBehaviour
 		{
 			if(this.transform.position.y>0)
 				gamemanager.GetComponent<GameManager>().GameOver();
-		}
-		if (col.gameObject.tag == "poop")
+		}else if (col.gameObject.tag == "poop")
 		{
 			Transform thisObject = this.gameObject.transform;
 			Transform colObject = col.gameObject.transform;
