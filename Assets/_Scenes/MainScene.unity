@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!137 &108017963 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700000, guid: eb84c9d708cacc548abeff1bf4e7edf3,
+    type: 3}
+  m_PrefabInternal: {fileID: 1044560055}
 --- !u!1 &141279133
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,9 +676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723a9c427c59c1e4ca874cd2ba6f7c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Shadow: {fileID: 1838525887255226, guid: fcac57fb145924490804ba76c53b2855, type: 2}
   Poop: {fileID: 1220748164571380, guid: 9c0ebed260d304f28892f413cc3a5bf4, type: 2}
   DropPoop: 32
-  PoopPercent: 0.1
+  GoalPoopPercent: 0.7
   interval: 1
   gameManager: {fileID: 2014660934}
 --- !u!54 &1070791461
@@ -980,11 +986,11 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1324,6 +1330,9 @@ MonoBehaviour:
   dyingAudio: {fileID: 1678210278}
   rollingSpeed: 6
   isRolling: 0
+  playerRenderer: {fileID: 108017963}
+  playerMaterial: {fileID: 2100000, guid: 2b8362b5ae0a1c549a74ccdb132eba2a, type: 2}
+  shitMaterial: {fileID: 2100000, guid: 3b2b4e38b377148919cc877eeac29991, type: 2}
 --- !u!54 &1908093604
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1542,11 +1551,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7f121725b2d78bf4b93336b3a2b23ed6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e50b176e6ba9f464f81c363240ab779b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

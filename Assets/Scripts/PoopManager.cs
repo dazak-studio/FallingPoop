@@ -4,11 +4,13 @@ using System.Collections;
 
 public class PoopManager : MonoBehaviour
 {
+	public GameObject Shadow;
 	public GameObject Poop;
 	private int XRange = 10;
 	private int YRange = 10;
 	public KeyCode DropPoop;
-	public float PoopPercent= 1;
+	public float GoalPoopPercent= 0.33f;
+	private float PoopPercent;
 	public float interval = 1;
 	private float timeShooted;
 	
@@ -22,7 +24,6 @@ public class PoopManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		PoopPercent = 0 ;
 	}
 	
 	//#TODO Initialization is needed
@@ -35,9 +36,10 @@ public class PoopManager : MonoBehaviour
 		{
 			PoopInterface();
 			onGoingTime = Time.time - startTime;
-			if (onGoingTime < 10)
+			float firstTime = 20f;
+			if (onGoingTime < firstTime)
 			{
-				PoopPercent = onGoingTime / 1000;
+				PoopPercent = GoalPoopPercent * onGoingTime / firstTime;
 			}
 		}
 		else
@@ -62,13 +64,25 @@ public class PoopManager : MonoBehaviour
 
 	void PoopMaker()
 	{
+		float randInit = 0.5f;
+		float randFinal = 1.5f;
+		
+		
 		for (int j = 0; j < XRange; j++)
 		{
 			for (int k = 0; k < YRange; k++)
 			{
-				if(Random.Range(0f,1f)<PoopPercent)
-					Instantiate(Poop, new Vector3(j*2-(float)XRange+Random.RandomRange(0.0f,1f), 10f+Random.RandomRange(0f,15f), k*2 -(float)YRange+Random.RandomRange(0f,1f)), Quaternion.identity);
-					
+				if (Random.Range(0f, 1f) < PoopPercent)
+				{
+					float interval = Random.RandomRange(2f, 2.5f);
+					float xVal = interval - (float) XRange + Random.RandomRange(0.0f, 1f);
+					float yVal = 10f + Random.RandomRange(0f, 15f);
+					float zVal = interval- (float) YRange + Random.RandomRange(0f, 1f);
+					Vector3 poopPos = new Vector3(j * interval + xVal, yVal, k * interval + zVal);
+					GameObject instGameObject = Instantiate(Poop,poopPos, Quaternion.identity);
+					//instGameObject.transform.localScale = new Vector3(Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal));
+				}
+
 			}
 		}
 	}

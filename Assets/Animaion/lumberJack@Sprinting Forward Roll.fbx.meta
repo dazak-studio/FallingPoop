@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b2877cbb1c1bdfd498b36094bb372ea1
-timeCreated: 1521947300
+guid: a14eb83bc29e9594fa9ac3ebab818fc6
+timeCreated: 1523149057
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -93,7 +93,7 @@ ModelImporter:
     400084: mixamorig:Spine2
     2100000: No Name
     4300000: lumberJack
-    7400000: Dying Backwards
+    7400000: mixamo.com
     9500000: //RootNode
     13700000: lumberJack
   externalObjects: {}
@@ -122,35 +122,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Dying Backwards
-      takeName: mixamo.com
-      firstFrame: 63
-      lastFrame: 138
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
