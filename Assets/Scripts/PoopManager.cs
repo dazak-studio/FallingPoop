@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PoopManager : MonoBehaviour
 {
+	public GameObject Shadow;
 	public GameObject Poop;
 	private int XRange = 10;
 	private int YRange = 10;
@@ -77,8 +78,9 @@ public class PoopManager : MonoBehaviour
 					float xVal = interval - (float) XRange + Random.RandomRange(0.0f, 1f);
 					float yVal = 10f + Random.RandomRange(0f, 15f);
 					float zVal = interval- (float) YRange + Random.RandomRange(0f, 1f);
-					GameObject instGameObject = Instantiate(Poop, new Vector3(j*interval + xVal, yVal, k*interval + zVal), Quaternion.identity);
-					instGameObject.transform.localScale = new Vector3(Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal));
+					Vector3 poopPos = new Vector3(j * interval + xVal, yVal, k * interval + zVal);
+					GameObject instGameObject = Instantiate(Poop,poopPos, Quaternion.identity);
+					//instGameObject.transform.localScale = new Vector3(Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal));
 				}
 
 			}

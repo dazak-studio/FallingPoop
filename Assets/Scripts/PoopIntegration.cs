@@ -12,17 +12,24 @@ public class PoopIntegration : MonoBehaviour
 	private bool done = false;
 	private int EatenPoop = 1;
 	private GameObject gamemanager;
+	public GameObject Shadow;
 	private GameObject uimanager;
 	private GameObject landmanager;
 	private bool isLanded = false;
 	private float landedTime;
+	private GameObject poopShadow;
 
 	void Start ()
 	{
 		gamemanager = GameObject.FindWithTag("GameManager");
 		uimanager = GameObject.FindWithTag("UIManager");
 		landmanager = GameObject.FindWithTag("Land");
-
+		//Shadow = GameObject.FindWithTag("Shadow");
+		Quaternion shadowQuaternion = Quaternion.identity;
+		Vector3 poopPos = this.transform.position;
+		poopPos.y = -0.45f;
+		shadowQuaternion.eulerAngles = new Vector3(90, 0, 0);
+		poopShadow = Instantiate(Shadow,poopPos,shadowQuaternion);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -40,9 +47,9 @@ public class PoopIntegration : MonoBehaviour
 			{
 				isLanded = true;
 				landedTime = Time.time;
-			} else if (Time.time > 0.5f+landedTime 
-                && gamemanager != null && gamemanager.GetComponent<GameManager>().GetIsPlaying())
+			}else if (Time.time > 0.3f+landedTime)
 			{
+				Destroy(poopShadow);
 				Destroy(this.gameObject);
 			}
 		}
@@ -51,13 +58,15 @@ public class PoopIntegration : MonoBehaviour
 	}
 	void FallingPoopDestroy()
 	{
-		//if (gamemanager!=null && gamemanager.GetComponent<GameManager>().GetIsPlaying())
-		//{
-		//	Destroy(this.gameObject);
-		//}
+		if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
+		{
+			Destroy(poopShadow);
+			Destroy(this.gameObject);
+		}
 		if (this.transform.position.y < -4f)
 		{
 			uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
+			Destroy(poopShadow);
 			Destroy(this.gameObject);
 		}
 	}
@@ -113,7 +122,8 @@ public class PoopIntegration : MonoBehaviour
 			{
 				int colEP = col.gameObject.GetComponent<PoopIntegration>().getEP();
 				col.gameObject.GetComponent<PoopIntegration>().setEP(0);
-				Destroy(col.gameObject);
+				//Destroy(col.gameObject.GetComponent<PoopIntegration>().Shadow);
+				//Destroy(col.gameObject);
 				EatenPoop = EatenPoop + colEP;
 				float size = (float)Math.Sqrt(Math.Sqrt(EatenPoop));
 				this.transform.localScale = new Vector3(size, size, size);

@@ -10,6 +10,9 @@ TagManager:
   - UIManager
   - GameManager
   - HelpText
+  - Land
+  - Mark
+  - Shadow
   layers:
   - Default
   - TransparentFX
