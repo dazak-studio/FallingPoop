@@ -30,6 +30,9 @@ public class PoopIntegration : MonoBehaviour
 		poopPos.y = -0.45f;
 		shadowQuaternion.eulerAngles = new Vector3(90, 0, 0);
 		poopShadow = Instantiate(Shadow,poopPos,shadowQuaternion);
+		poopShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f,0f);
+		Vector3 poopShadowSize = this.transform.localScale;
+		poopShadow.transform.localScale = poopShadowSize*0.35f;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -37,6 +40,7 @@ public class PoopIntegration : MonoBehaviour
 		LandedPoopDestory();
         FallingPoopStop();
         StoppedPoopDestroy();
+		poopShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f,(20f-transform.position.y)/20f+0.3f);
 	}
 
 	void LandedPoopDestory()
