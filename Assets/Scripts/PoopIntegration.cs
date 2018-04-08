@@ -28,6 +28,8 @@ public class PoopIntegration : MonoBehaviour
 	void Update () {
 		FallingPoopDestroy();
 		LandedPoopDestory();
+        FallingPoopStop();
+        StoppedPoopDestroy();
 	}
 
 	void LandedPoopDestory()
@@ -38,7 +40,8 @@ public class PoopIntegration : MonoBehaviour
 			{
 				isLanded = true;
 				landedTime = Time.time;
-			}else if (Time.time > 0.5f+landedTime)
+			} else if (Time.time > 0.5f+landedTime 
+                && gamemanager != null && gamemanager.GetComponent<GameManager>().GetIsPlaying())
 			{
 				Destroy(this.gameObject);
 			}
@@ -48,16 +51,35 @@ public class PoopIntegration : MonoBehaviour
 	}
 	void FallingPoopDestroy()
 	{
-		if (gamemanager!=null&&!gamemanager.GetComponent<GameManager>().GetIsPlaying())
-		{
-			Destroy(this.gameObject);
-		}
+		//if (gamemanager!=null && gamemanager.GetComponent<GameManager>().GetIsPlaying())
+		//{
+		//	Destroy(this.gameObject);
+		//}
 		if (this.transform.position.y < -4f)
 		{
 			uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
 			Destroy(this.gameObject);
 		}
 	}
+
+    private void FallingPoopStop()
+    {
+        if (gamemanager != null && !gamemanager.GetComponent<GameManager>().GetIsPlaying())
+        {
+            this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+            this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+    }
+
+    private void StoppedPoopDestroy()
+    {
+        if(!this.gameObject.GetComponent<Rigidbody>().useGravity
+            && gamemanager != null
+            && gamemanager.GetComponent<GameManager>().GetIsPlaying())
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 	private void setEP(int ep)
 	{
