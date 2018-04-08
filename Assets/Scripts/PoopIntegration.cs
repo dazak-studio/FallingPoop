@@ -71,7 +71,7 @@ public class PoopIntegration : MonoBehaviour
 		//}
 		if (this.transform.position.y < -4f)
 		{
-			uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
+			//uimanager.GetComponent<UIManager>().poopScore += EatenPoop;
 			Destroy(poopShadow);
 			Destroy(this.gameObject);
 		}
