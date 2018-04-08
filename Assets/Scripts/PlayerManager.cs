@@ -17,6 +17,10 @@ public class PlayerManager : MonoBehaviour
     Rigidbody playerRigidbody;
     //MeshRenderer playerMeshRenderer;
 
+    public Renderer playerRenderer;
+    public Material playerMaterial;
+    public Material shitMaterial;
+
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -65,6 +69,12 @@ public class PlayerManager : MonoBehaviour
             {
                 LumberjackAnimationScript.instance.SetAnimState(0);
             }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            playerRenderer.material = playerMaterial;
+            gameManager.GetComponent<GameManager>().StartGame();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -118,5 +128,6 @@ public class PlayerManager : MonoBehaviour
     {
         dyingAudio.Play();
         gameManager.GetComponent<GameManager>().GameOver();
+        playerRenderer.material = shitMaterial;
     }
 }

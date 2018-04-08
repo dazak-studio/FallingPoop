@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!137 &108017963 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 13700000, guid: eb84c9d708cacc548abeff1bf4e7edf3,
+    type: 3}
+  m_PrefabInternal: {fileID: 1044560055}
 --- !u!1 &141279133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1327,9 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   moveSpeed: 12
   dyingAudio: {fileID: 1678210278}
+  playerRenderer: {fileID: 108017963}
+  playerMaterial: {fileID: 2100000, guid: 2b8362b5ae0a1c549a74ccdb132eba2a, type: 2}
+  shitMaterial: {fileID: 2100000, guid: 3b2b4e38b377148919cc877eeac29991, type: 2}
 --- !u!54 &1908093604
 Rigidbody:
   m_ObjectHideFlags: 0
