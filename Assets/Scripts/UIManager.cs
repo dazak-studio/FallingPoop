@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         scoreText.text = "Press Z To Start";
         mainText.text = "Falling Poops 3D";
-        helpText.text = "Move : ← ↑ ↓ →\n\nChange Mode : Space";
+        helpText.text = "Move : ← ↑ ↓ →\n\nRolling : Space";
     }
 
     // call when you want to start game
