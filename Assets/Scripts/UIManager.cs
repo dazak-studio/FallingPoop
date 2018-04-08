@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         isPlaying = true;
         mainText.text = "";
-        helpText.text = "";
         poopScore = 0;
     }
 
