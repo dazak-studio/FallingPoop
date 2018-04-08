@@ -7,8 +7,6 @@ public class PlayerManager : MonoBehaviour
     public GameObject gameManager;
 
     public float moveSpeed = 10f;
-    // 일반 : 10f, 삽 들었을 때 : 8f, 삽 들고 똥 밀 때 : 5f
-    public bool isEquipedShovel = false;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     public AudioSource dyingAudio;
@@ -51,10 +49,6 @@ public class PlayerManager : MonoBehaviour
             {
                 LumberjackAnimationScript.instance.SetAnimState(3);
             }
-            else if (isEquipedShovel)
-            {
-                LumberjackAnimationScript.instance.SetAnimState(2);
-            }
             else
             {
                 LumberjackAnimationScript.instance.SetAnimState(1);
@@ -67,10 +61,6 @@ public class PlayerManager : MonoBehaviour
             {
                 LumberjackAnimationScript.instance.SetAnimState(3);
             }
-            else if (isEquipedShovel)
-            {
-                LumberjackAnimationScript.instance.SetAnimState(2);
-            }
             else
             {
                 LumberjackAnimationScript.instance.SetAnimState(0);
@@ -79,17 +69,7 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ToggleShovel(isEquipedShovel);
         }
-
-    /*
-        // Position Init Test Code
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            InitPosition();
-        }
-    */
-
     }
 
     void FixedUpdate()
@@ -101,14 +81,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.transform.tag == "poop")
         {
-            if (isEquipedShovel)
-            {
-                PushPoop();
-            }
-            else
-            {
-                TouchPoop();
-            }
+            TouchPoop();
         }
     }
 
@@ -116,21 +89,11 @@ public class PlayerManager : MonoBehaviour
     {
         this.transform.position = initialPosition;
         this.transform.rotation = initialRotation;
-
-        if (isEquipedShovel)
-        {
-            ToggleShovel(isEquipedShovel);
-        }
     }
 
     void Move(float h, float v)
     {
         float moveSpeed = this.moveSpeed;
-
-        if (isEquipedShovel)
-        {
-            moveSpeed = 5f;
-        }
 
         // Set player look direction
         lookDirection = h * Vector3.right + v * Vector3.forward;
@@ -149,25 +112,6 @@ public class PlayerManager : MonoBehaviour
             gameManager.GetComponent<GameManager>().GameOver();
             
         }
-    }
-
-    void ToggleShovel(bool isEquipedShovel)
-    {
-        this.isEquipedShovel = !this.isEquipedShovel;
-
-        // if (isEquipedShovel)
-        // {
-        //   playerMeshRenderer.material.color = Color.white;
-        //     }
-        // else
-        // {
-        //playerMeshRenderer.material.color = Color.red;
-        //     }
-    }
-
-    void PushPoop()
-    {
-        // 삽 들고 똥 밀 때에 대한 함수. 만들어 놓기만 함.
     }
 
     void TouchPoop()
