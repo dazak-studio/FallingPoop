@@ -679,8 +679,8 @@ MonoBehaviour:
   Shadow: {fileID: 1838525887255226, guid: fcac57fb145924490804ba76c53b2855, type: 2}
   Poop: {fileID: 1220748164571380, guid: 9c0ebed260d304f28892f413cc3a5bf4, type: 2}
   GoalPoopPercent: 0.7
-  intervalPoopRemake: 1
-  gameManager: {fileID: 2014660934}
+  IntervalPoopRemake: 1
+  GameManager: {fileID: 2014660934}
 --- !u!54 &1070791461
 Rigidbody:
   m_ObjectHideFlags: 0
