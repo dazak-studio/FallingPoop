@@ -14,7 +14,8 @@ public class PlayerManager : MonoBehaviour
 
     public float rollingSpeed = 10f;
     private bool isRolling = false;
-    private float rollingStartTime;
+    private float rollingStartTime = 0f;
+    private float rollingEndTime = 0f;
     private float rollingLength;
     Vector3 currentPosition;
     Vector3 afterPosition;
@@ -65,15 +66,16 @@ public class PlayerManager : MonoBehaviour
             
             if (moveStart)
             {
-                Move(h, v);
+                Move();
 
                 // Rolling
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    if(isRolling) return;
                     isRolling = true;
 
                     currentPosition = transform.position;
-                    afterPosition = currentPosition + transform.forward * 2;
+                    afterPosition = currentPosition + transform.forward * 1.2f;
                     
                     rollingStartTime = Time.time;
                     rollingLength = Vector3.Distance(currentPosition, afterPosition);
@@ -104,20 +106,13 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            if (!gameManager.GetComponent<GameManager>().GetIsPlaying())
+            LumberjackAnimationScript.instance.SetAnimState(3);
+
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                LumberjackAnimationScript.instance.SetAnimState(3);
+                playerRenderer.material = playerMaterial;
+                gameManager.GetComponent<GameManager>().StartGame();
             }
-            else
-            {
-                LumberjackAnimationScript.instance.SetAnimState(0);
-            }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            playerRenderer.material = playerMaterial;
-            gameManager.GetComponent<GameManager>().StartGame();
         }
     }
 
@@ -142,12 +137,13 @@ public class PlayerManager : MonoBehaviour
 
     void SetLookDirection(float h, float v)
     {
-        // Set player look direction
+        if (isRolling || Time.time - rollingEndTime < 0.4f) return;
+        
         lookDirection = h * Vector3.right + v * Vector3.forward;
         this.transform.rotation = Quaternion.LookRotation(lookDirection);
     }
 
-    void Move(float h, float v)
+    void Move()
     {
         float moveSpeed = this.moveSpeed;
 
@@ -164,9 +160,10 @@ public class PlayerManager : MonoBehaviour
 
         transform.position = Vector3.Lerp(currentPosition, afterPosition, fracRolling);
 
-        if(fracRolling > 1)
+        if(fracRolling > 0.99)
         {
             rollingStartTime = 0f;
+            rollingEndTime = Time.time;
             rollingLength = 0f;
             isRolling = false;
         }
