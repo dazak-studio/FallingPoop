@@ -26,12 +26,14 @@ public class PlayerManager : MonoBehaviour
     Rigidbody playerRigidbody;
 
     public Renderer playerRenderer;
+    public BoxCollider playerBoxCollider;
     public Material playerMaterial;
     public Material shitMaterial;
 
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        playerBoxCollider = GetComponent<BoxCollider>();
     }
 
     void Start()
@@ -167,6 +169,17 @@ public class PlayerManager : MonoBehaviour
             rollingLength = 0f;
             isRolling = false;
         }
+    }
+
+    void ChangePlayerSize()
+    {
+        if (isRolling || Time.time - rollingEndTime < 0.4f) {
+            playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.2f, playerBoxCollider.size.z);
+            playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.4f, playerBoxCollider.center.z);
+        }
+        
+        playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.6f, playerBoxCollider.size.z);
+        playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.2f, playerBoxCollider.center.z);
     }
 
     void FallOut()
