@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Text scoreText;
+    public RawImage reStart;
     public Text helpText;
     public Text mainText;
     private float leftTime;
@@ -25,9 +26,9 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         leftTime = 0.0f;
-        scoreText.text = "Press Z To Start";
+        scoreText.text = "Press          To Start";
         mainText.text = "Falling Poops 3D";
-        helpText.text = "Move : ← ↑ ↓ →\n\nRolling : Space";
+        helpText.text = "Move : \n\nRolling :       ";
     }
 
     // call when you want to start game
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         isPlaying = true;
         mainText.text = "";
+        reStart.enabled = false;
     }
 
     // call when you want to do gameover
@@ -43,7 +45,9 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress Z to Restart";
+        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress          \nto Restart";
+        reStart.rectTransform.anchoredPosition = new Vector3(30,148,0);
+        reStart.enabled = true;
     }
 
     private void CheckLeftTime()
