@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour {
     public Text mainText;
     private float leftTime;
     private bool isPlaying;
-    public float poopScore;
     
 	// Use this for initialization
 	void Start () {
@@ -28,7 +27,7 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         scoreText.text = "Press Z To Start";
         mainText.text = "Falling Poops 3D";
-        helpText.text = "Move : ← ↑ ↓ →\n\nChange Mode : Space";
+        helpText.text = "Move : ← ↑ ↓ →\n\nRolling : Space";
     }
 
     // call when you want to start game
@@ -37,8 +36,6 @@ public class UIManager : MonoBehaviour {
         leftTime = 0.0f;
         isPlaying = true;
         mainText.text = "";
-        helpText.text = "";
-        poopScore = 0;
     }
 
     // call when you want to do gameover
@@ -46,7 +43,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + "\n\nFallen Poops : " + poopScore + " kg" + "\n\nPress Z to Restart";
+        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress Z to Restart";
     }
 
     private void CheckLeftTime()
@@ -54,7 +51,7 @@ public class UIManager : MonoBehaviour {
         if (isPlaying)
         {
             leftTime += Time.deltaTime;
-            scoreText.text = "Time : " + (int)leftTime + " sec" + "\n\nFallen Poops : " + poopScore + " kg";
+            scoreText.text = "Time : " + (int)leftTime + " sec";
         }
     }
 }

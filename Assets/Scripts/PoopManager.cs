@@ -36,7 +36,7 @@ public class PoopManager : MonoBehaviour
 		{
 			PoopInterface();
 			onGoingTime = Time.time - startTime;
-			float firstTime = 20f;
+			float firstTime = 60f;
 			if (onGoingTime < firstTime)
 			{
 				PoopPercent = GoalPoopPercent * onGoingTime / firstTime;
@@ -76,11 +76,12 @@ public class PoopManager : MonoBehaviour
 				{
 					float interval = Random.RandomRange(2f, 2.5f);
 					float xVal = interval - (float) XRange + Random.RandomRange(0.0f, 1f);
-					float yVal = 10f + Random.RandomRange(0f, 15f);
+					float yVal = 10f + Random.RandomRange(0f, 10f);
 					float zVal = interval- (float) YRange + Random.RandomRange(0f, 1f);
 					Vector3 poopPos = new Vector3(j * interval + xVal, yVal, k * interval + zVal);
 					GameObject instGameObject = Instantiate(Poop,poopPos, Quaternion.identity);
-					//instGameObject.transform.localScale = new Vector3(Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal),Random.RandomRange(randInit,randFinal));
+					float Scale = Random.RandomRange(randInit, randFinal);
+					instGameObject.transform.localScale = new Vector3(Scale,Scale,Scale);
 				}
 
 			}
