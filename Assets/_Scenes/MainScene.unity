@@ -1228,8 +1228,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   moveSpeed: 4.5
   dyingAudio: {fileID: 1678210278}
-  rollingSpeed: 6
-  isRolling: 0
+  rollingSpeed: 10
   playerRenderer: {fileID: 108017963}
   playerMaterial: {fileID: 2100000, guid: 2b8362b5ae0a1c549a74ccdb132eba2a, type: 2}
   shitMaterial: {fileID: 2100000, guid: 3b2b4e38b377148919cc877eeac29991, type: 2}

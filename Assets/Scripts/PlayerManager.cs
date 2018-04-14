@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     private Quaternion initialRotation;
     public AudioSource dyingAudio;
 
-    public float rollingSpeed = 6f;
+    public float rollingSpeed = 10f;
     private bool isRolling = false;
     private float rollingStartTime;
     private float rollingLength;
@@ -66,21 +66,23 @@ public class PlayerManager : MonoBehaviour
             if (moveStart)
             {
                 Move(h, v);
+
+                // Rolling
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    isRolling = true;
+
+                    currentPosition = transform.position;
+                    afterPosition = currentPosition + transform.forward * 2;
+                    
+                    rollingStartTime = Time.time;
+                    rollingLength = Vector3.Distance(currentPosition, afterPosition);
+                }
+
+                Rolling(this.currentPosition, this.afterPosition, this.rollingLength, this.rollingStartTime);
             }
 
-            // Rolling
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isRolling = true;
-
-                currentPosition = transform.position;
-                afterPosition = currentPosition + transform.forward * 2;
-                
-                rollingStartTime = Time.time;
-                rollingLength = Vector3.Distance(currentPosition, afterPosition);
-            }
-
-            Rolling(this.currentPosition, this.afterPosition, this.rollingLength, this.rollingStartTime);
+            
 
             if (!gameManager.GetComponent<GameManager>().GetIsPlaying())
             {
