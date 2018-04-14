@@ -678,10 +678,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shadow: {fileID: 1838525887255226, guid: fcac57fb145924490804ba76c53b2855, type: 2}
   Poop: {fileID: 1220748164571380, guid: 9c0ebed260d304f28892f413cc3a5bf4, type: 2}
-  DropPoop: 32
   GoalPoopPercent: 0.7
-  interval: 1
-  gameManager: {fileID: 2014660934}
+  IntervalPoopRemake: 1
+  GameManager: {fileID: 2014660934}
 --- !u!54 &1070791461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1272,14 +1271,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1908093601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 1693800963}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &2014660934
 GameObject:
   m_ObjectHideFlags: 0
