@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        
         if (
             gameManager.GetComponent<GameManager>().GetIsPlaying()
         )
@@ -70,6 +71,9 @@ public class PlayerManager : MonoBehaviour
             {
                 Move();
 
+                if (!isRolling && (Time.time - rollingEndTime >0.4f && Time.time - rollingEndTime < 0.5f))
+                    changePlayerSize(true);
+            
                 // Rolling
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -84,6 +88,7 @@ public class PlayerManager : MonoBehaviour
                 }
 
                 Rolling(this.currentPosition, this.afterPosition, this.rollingLength, this.rollingStartTime);
+                
             }
 
             
@@ -139,7 +144,7 @@ public class PlayerManager : MonoBehaviour
 
     void SetLookDirection(float h, float v)
     {
-        if (isRolling || Time.time - rollingEndTime < 0.4f) return;
+        if (isRolling || Time.time - rollingEndTime < 0.4f)return;
         
         lookDirection = h * Vector3.right + v * Vector3.forward;
         this.transform.rotation = Quaternion.LookRotation(lookDirection);
@@ -156,6 +161,8 @@ public class PlayerManager : MonoBehaviour
     {
         if(!isRolling) return;
 
+        changePlayerSize(false);
+
         float distCovered = (Time.time - rollingStartTime) * rollingSpeed;
 
         float fracRolling = distCovered / rollingLength;
@@ -171,15 +178,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void ChangePlayerSize()
+    void changePlayerSize(bool largeBool)
     {
-        if (isRolling || Time.time - rollingEndTime < 0.4f) {
-            playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.2f, playerBoxCollider.size.z);
-            playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.4f, playerBoxCollider.center.z);
+        if (largeBool)
+        {
+            playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.6f, playerBoxCollider.size.z);
+            playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.2f, playerBoxCollider.center.z);
+        }
+        else
+        {
+           playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.2f, playerBoxCollider.size.z);
+           playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.4f, playerBoxCollider.center.z);
         }
         
-        playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 0.6f, playerBoxCollider.size.z);
-        playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.2f, playerBoxCollider.center.z);
     }
 
     void FallOut()
