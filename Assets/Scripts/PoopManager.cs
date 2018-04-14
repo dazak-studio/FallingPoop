@@ -6,59 +6,46 @@ public class PoopManager : MonoBehaviour
 {
 	public GameObject Shadow;
 	public GameObject Poop;
-	private int XRange = 10;
-	private int YRange = 10;
-	public KeyCode DropPoop;
-	public float GoalPoopPercent= 0.33f;
-	private float PoopPercent;
-	public float interval = 1;
-	private float timeShooted;
+	private int _xRange = 8;
+	private int _yRange = 8;
 	
-	//#TODO Maybe the time should be synced
-	private float startTime = 0f;
-	private float onGoingTime = 0f;
+	public float GoalPoopPercent;
+	private float _poopPercent;
+	public float IntervalPoopRemake = 1;
+	private float _timeShooted;
+	
+	private float _startTime = 0f;
+	private float _onGoingTime = 0f;
 	
 
-	public GameObject gameManager;
+	public GameObject GameManager;
 
-	// Use this for initialization
-	void Start ()
-	{
-	}
 	
-	//#TODO Initialization is needed
-	
-	// Update is called once per frame
 	void Update () {
 
-		//Update
-		if (gameManager.GetComponent<GameManager>().GetIsPlaying())
+		if (GameManager.GetComponent<GameManager>().GetIsPlaying())
 		{
-			PoopInterface();
-			onGoingTime = Time.time - startTime;
+			_onGoingTime = Time.time - _startTime;
 			float firstTime = 60f;
-			if (onGoingTime < firstTime)
+			if (_onGoingTime < firstTime)
 			{
-				PoopPercent = GoalPoopPercent * onGoingTime / firstTime;
+				_poopPercent = GoalPoopPercent * _onGoingTime / firstTime;
 			}
+			PoopInterface();
 		}
 		else
 		{
-			startTime = Time.time;
+			_startTime = Time.time;
 		}
 		
 	}
 
 	void PoopInterface()
 	{
-		if (Time.time > timeShooted + interval)
+		if (Time.time > _timeShooted + IntervalPoopRemake)
 		{
 			PoopMaker();	
-			timeShooted = Time.time;
-		}
-		if (Input.GetKeyDown(DropPoop))
-		{
-			PoopMaker();	
+			_timeShooted = Time.time;
 		}
 	}
 
@@ -68,16 +55,16 @@ public class PoopManager : MonoBehaviour
 		float randFinal = 1.5f;
 		
 		
-		for (int j = 0; j < XRange; j++)
+		for (int j = 0; j < _xRange; j++)
 		{
-			for (int k = 0; k < YRange; k++)
+			for (int k = 0; k < _yRange; k++)
 			{
-				if (Random.Range(0f, 1f) < PoopPercent)
+				if (Random.Range(0f, 1f) < _poopPercent)
 				{
 					float interval = Random.RandomRange(2f, 2.5f);
-					float xVal = interval - (float) XRange + Random.RandomRange(0.0f, 1f);
+					float xVal = interval - (float) _xRange + Random.RandomRange(0.0f, 1f);
 					float yVal = 10f + Random.RandomRange(0f, 10f);
-					float zVal = interval- (float) YRange + Random.RandomRange(0f, 1f);
+					float zVal = interval- (float) _yRange + Random.RandomRange(0f, 1f);
 					Vector3 poopPos = new Vector3(j * interval + xVal, yVal, k * interval + zVal);
 					GameObject instGameObject = Instantiate(Poop,poopPos, Quaternion.identity);
 					float Scale = Random.RandomRange(randInit, randFinal);
@@ -87,7 +74,4 @@ public class PoopManager : MonoBehaviour
 			}
 		}
 	}
-	//When Meet ==> Delete both and make a new object
-	//Poop.transform.localScale += new Vector3(1f,0,0);	
-	
 }
