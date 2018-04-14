@@ -13,13 +13,14 @@ public class PlayerManager : MonoBehaviour
     public AudioSource dyingAudio;
 
     public float rollingSpeed = 6f;
-    public bool isRolling = false;
+    private bool isRolling = false;
     private float rollingStartTime;
     private float rollingLength;
     Vector3 currentPosition;
     Vector3 afterPosition;
 
     Vector3 lookDirection;
+    private bool moveStart = false;
 
     Rigidbody playerRigidbody;
 
@@ -42,27 +43,58 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         if (
-            (Input.GetKey(KeyCode.UpArrow) ||
-             Input.GetKey(KeyCode.LeftArrow) ||
-             Input.GetKey(KeyCode.DownArrow) ||
-             Input.GetKey(KeyCode.RightArrow))
-            &&
             gameManager.GetComponent<GameManager>().GetIsPlaying()
         )
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            float h = 0;
+            float v = 0;
 
-            Move(h, v);
+            // Moving
+            if (Input.GetKey(KeyCode.UpArrow) ||
+                Input.GetKey(KeyCode.LeftArrow) ||
+                Input.GetKey(KeyCode.DownArrow) ||
+                Input.GetKey(KeyCode.RightArrow))
+            {
+                h = Input.GetAxisRaw("Horizontal");
+                v = Input.GetAxisRaw("Vertical");
+                                
+                SetLookDirection(h, v);
+                
+                moveStart = true;
+            }
+            
+            if (moveStart)
+            {
+                Move(h, v);
+            }
+
+            // Rolling
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isRolling = true;
+
+                currentPosition = transform.position;
+                afterPosition = currentPosition + transform.forward * 2;
+                
+                rollingStartTime = Time.time;
+                rollingLength = Vector3.Distance(currentPosition, afterPosition);
+            }
+
+            Rolling(this.currentPosition, this.afterPosition, this.rollingLength, this.rollingStartTime);
 
             if (!gameManager.GetComponent<GameManager>().GetIsPlaying())
             {
                 LumberjackAnimationScript.instance.SetAnimState(3);
             }
-            else
+            else if (moveStart)
             {
                 LumberjackAnimationScript.instance.SetAnimState(1);
             }
+            else
+            {
+                LumberjackAnimationScript.instance.SetAnimState(0);
+            }
+
         }
         else
         {
@@ -81,19 +113,6 @@ public class PlayerManager : MonoBehaviour
             playerRenderer.material = playerMaterial;
             gameManager.GetComponent<GameManager>().StartGame();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isRolling = true;
-
-            currentPosition = transform.position;
-            afterPosition = currentPosition + transform.forward * 2;
-            
-            rollingStartTime = Time.time;
-            rollingLength = Vector3.Distance(currentPosition, afterPosition);
-        }
-
-        Rolling(this.currentPosition, this.afterPosition, this.rollingLength, this.rollingStartTime);
     }
 
     void FixedUpdate()
@@ -115,13 +134,16 @@ public class PlayerManager : MonoBehaviour
         this.transform.rotation = initialRotation;
     }
 
-    void Move(float h, float v)
+    void SetLookDirection(float h, float v)
     {
-        float moveSpeed = this.moveSpeed;
-
         // Set player look direction
         lookDirection = h * Vector3.right + v * Vector3.forward;
         this.transform.rotation = Quaternion.LookRotation(lookDirection);
+    }
+
+    void Move(float h, float v)
+    {
+        float moveSpeed = this.moveSpeed;
 
         this.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
@@ -150,7 +172,7 @@ public class PlayerManager : MonoBehaviour
         {
             dyingAudio.Play();
             gameManager.GetComponent<GameManager>().GameOver();
-            
+            moveStart = false;
         }
     }
 
@@ -158,6 +180,7 @@ public class PlayerManager : MonoBehaviour
     {
         dyingAudio.Play();
         gameManager.GetComponent<GameManager>().GameOver();
+        moveStart = false;
         playerRenderer.material = shitMaterial;
     }
 }
