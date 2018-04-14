@@ -88,6 +88,10 @@ public class PlayerManager : MonoBehaviour
             {
                 LumberjackAnimationScript.instance.SetAnimState(3);
             }
+            else if (isRolling)
+            {
+                LumberjackAnimationScript.instance.SetAnimState(2);
+            }
             else if (moveStart)
             {
                 LumberjackAnimationScript.instance.SetAnimState(1);
