@@ -9,9 +9,14 @@ public class PoopManager : MonoBehaviour
 	private int _xRange = 8;
 	private int _yRange = 8;
 	
-	public float GoalPoopPercent;
+	public float GoalPoopPercent = 0.8f;
+	public float InitPoopPercent = 0.1f;
+	public float ReachingTime = 30f;
+	
 	private float _poopPercent;
-	public float IntervalPoopRemake = 1;
+	
+	
+	private float IntervalPoopRemake = 1;
 	private float _timeShooted;
 	
 	private float _startTime = 0f;
@@ -25,12 +30,13 @@ public class PoopManager : MonoBehaviour
 
 		if (GameManager.GetComponent<GameManager>().GetIsPlaying())
 		{
+			
 			_onGoingTime = Time.time - _startTime;
-			float firstTime = 60f;
-			if (_onGoingTime < firstTime)
+			if (_onGoingTime < ReachingTime)
 			{
-				_poopPercent = GoalPoopPercent * _onGoingTime / firstTime;
+				_poopPercent = (GoalPoopPercent-InitPoopPercent) * _onGoingTime / ReachingTime + InitPoopPercent;
 			}
+			
 			PoopInterface();
 		}
 		else
