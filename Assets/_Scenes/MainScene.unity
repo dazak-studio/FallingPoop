@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427135, b: 0.56452316, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667588, g: 0.48427194, b: 0.564524, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -954,8 +954,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shadow: {fileID: 1838525887255226, guid: fcac57fb145924490804ba76c53b2855, type: 2}
   Poop: {fileID: 1220748164571380, guid: 9c0ebed260d304f28892f413cc3a5bf4, type: 2}
-  GoalPoopPercent: 0.7
-  IntervalPoopRemake: 1
+  GoalPoopPercent: 0.9
+  InitPoopPercent: 0.1
+  ReachingTime: 20
   GameManager: {fileID: 2014660934}
 --- !u!54 &1070791461
 Rigidbody:
