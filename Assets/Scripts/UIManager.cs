@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour {
     {
         isPlaying = false;
         mainText.text = "GAME OVER";
-        scoreText.text = "Your Score : " + (int)leftTime + "\n\nPress          \nto Restart";
+        scoreText.text = "Survival Time : " + string.Format("{0:0.000}", leftTime) + "\n\nPress          \nto Restart";
         reStart.rectTransform.anchoredPosition = new Vector3(30,148,0);
         reStart.enabled = true;
     }
@@ -54,8 +54,8 @@ public class UIManager : MonoBehaviour {
     {
         if (isPlaying)
         {
-            leftTime += Time.deltaTime;
-            scoreText.text = "Time : " + (int)leftTime + " sec";
+            leftTime += Mathf.Round(Time.deltaTime * 1000) * 0.001f;
+            scoreText.text = "Time\n" + string.Format("{0:0.000}", leftTime) + " sec";
         }
     }
 }
